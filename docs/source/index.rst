@@ -6,9 +6,14 @@
 Welcome to SEAWA HQ's documentation!
 ====================================
 
+This is a documentation created by SEAWA HQ developer.
+
 .. toctree::
    :maxdepth: 2
-   :caption: Contents:
+   :caption: Table of Contents:
+
+   HQ API <api.rst>
+   HQ Member Code <hq-member-code.rst>
 
 
 

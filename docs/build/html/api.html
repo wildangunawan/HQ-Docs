@@ -1,0 +1,816 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>API Reference &mdash; SEAWA HQ 1.0 documentation</title>
+  
+
+  
+  <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+
+  
+  
+  
+  
+
+  
+  <!--[if lt IE 9]>
+    <script src="_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+        <script src="_static/jquery.js"></script>
+        <script src="_static/underscore.js"></script>
+        <script src="_static/doctools.js"></script>
+        <script src="_static/language_data.js"></script>
+    
+    <script type="text/javascript" src="_static/js/theme.js"></script>
+
+    
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="HQ Member Code" href="hq-member-code.html" />
+    <link rel="prev" title="Welcome to SEAWA HQ’s documentation!" href="index.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="index.html" class="icon icon-home" alt="Documentation Home"> SEAWA HQ
+          
+
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Table of Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1 current"><a class="current reference internal" href="#">HQ API</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#event">Event</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#get-all-events">Get all events</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#get-future-events">Get future events</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#get-past-events">Get past events</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#get-specific-event">Get specific event</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#get-confirmed-atc-in-an-event">Get confirmed ATC in an event</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#get-event-by-region">Get event by region</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#get-event-by-division">Get event by division</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#get-event-by-vacc">Get event by vACC</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#fss">FSS</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#get-all-fss">Get all FSS</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#get-fss-by-division">Get FSS by division</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#general">General</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#get-member-s-info">Get member’s info</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#get-member-s-approval">Get member’s approval</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#get-member-s-approval-for-fss">Get member’s approval for FSS</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#get-member-s-approval-for-resident-visiting">Get member’s approval for resident/visiting</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#news">News</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#get-a-news">Get a news</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#get-news-by-region">Get news by region</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#get-news-by-division">Get news by division</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#get-news-by-vacc">Get news by vACC</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#policy">Policy</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#get-a-policy">Get a policy</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#get-policy-by-region">Get policy by region</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#get-policy-by-division">Get policy by division</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#get-policy-by-vacc">Get policy by vACC</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#region">Region</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#get-a-region">Get a region</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#get-divisions-in-region">Get divisions in region</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#get-region-staff">Get region staff</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#division">Division</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#get-a-division">Get a division</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#get-vacc-in-division">Get vACC in division</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#get-division-staff">Get division staff</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#vacc">vACC</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#get-a-vacc">Get a vACC</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#get-resident-in-vacc">Get resident in vACC</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#get-resident-by-rating-in-vacc">Get resident by rating in vACC</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#get-visitor-in-vacc">Get visitor in vACC</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#get-vacc-staff">Get vACC staff</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#get-vacc-mentor">Get vACC mentor</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#solo">Solo</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#get-solo-by-region">Get solo by region</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#get-solo-by-division">Get solo by division</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#get-solo-by-vacc">Get solo by vACC</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#charscector">CharSceCtor</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#get-charscector-in-vacc-by-type">Get CharSceCtor in vACC by type</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="hq-member-code.html">HQ Member Code</a></li>
+</ul>
+
+            
+          
+        </div>
+        
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">SEAWA HQ</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="index.html" class="icon icon-home"></a> &raquo;</li>
+        
+      <li>API Reference</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="_sources/api.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="api-reference">
+<h1>API Reference<a class="headerlink" href="#api-reference" title="Permalink to this headline">¶</a></h1>
+<p>SEAWA HQ is a HQ built for VATSEA and VATWA. Since both division has decided to have their own HQ while still use the same system, we decided to use both domain in our example.</p>
+<p>Change the example domain to <strong>hq.vatwa.net/api/</strong> for VATWA HQ or <strong>hq.vat-sea.com/api/</strong> for VATSEA HQ. Please note that there is a maximum limit 30 requests/hour/IP address for all routes.</p>
+<p>Region, division, and subdivision code used below can be found at <a class="reference internal" href="hq-member-code.html"><span class="doc">here</span></a>.</p>
+<div class="section" id="event">
+<h2>Event<a class="headerlink" href="#event" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="get-all-events">
+<h3>Get all events<a class="headerlink" href="#get-all-events" title="Permalink to this headline">¶</a></h3>
+<p><code class="docutils literal notranslate"><span class="pre">http://hq.vat-sea.com/api/events/all</span></code></p>
+<p>This endpoint will return all events in HQ.</p>
+<p>Response:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">[</span>
+      <span class="p">{</span>
+        <span class="s2">&quot;id&quot;</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
+        <span class="s2">&quot;title&quot;</span><span class="p">:</span> <span class="s2">&quot;Amman Thursday Night&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;description&quot;</span><span class="p">:</span> <span class="s2">&quot;Fly into/out of Amman&#39;s Queen Alia Intl. Airport [OJAI] every week on Thursday night with full ATC from 1600z to 1900z!&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;start&quot;</span><span class="p">:</span> <span class="s2">&quot;2020-08-20 16:00:00&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;end&quot;</span><span class="p">:</span> <span class="s2">&quot;2020-08-20 19:00:00&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;banner_link&quot;</span><span class="p">:</span> <span class="s2">&quot;https://i.imgur.com/7cr6kTn.png&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;event_referrer&quot;</span><span class="p">:</span> <span class="s2">&quot;https://forums.vatsim.net/topic/28469-aug-20th-16z-19z-amman-thursday-night/&quot;</span>
+      <span class="p">},</span>
+      <span class="p">{</span>
+        <span class="s2">&quot;id&quot;</span><span class="p">:</span> <span class="mi">2</span><span class="p">,</span>
+        <span class="s2">&quot;title&quot;</span><span class="p">:</span> <span class="s2">&quot;Surabaya In/Out&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;description&quot;</span><span class="p">:</span> <span class="s2">&quot;Surabaya is one of the largest aviation hubs in Indonesia, it is also the second largest city in Indonesia and boast a huge number of international flight due to its popularity as a tourism and business destination.</span><span class="se">\n</span><span class="s2">                                In this event, we will attempt to give you the sensation of flying into one of the busiest airspaces in Indonesia.&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;start&quot;</span><span class="p">:</span> <span class="s2">&quot;2020-08-20 16:00:00&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;end&quot;</span><span class="p">:</span> <span class="s2">&quot;2020-08-20 19:00:00&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;banner_link&quot;</span><span class="p">:</span> <span class="s2">&quot;https://cdn.discordapp.com/attachments/475903576707694602/747523206486687794/IN-OUT-WARR.png&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;event_referrer&quot;</span><span class="p">:</span> <span class="s2">&quot;https://forums.vatsim.net/topic/28762-online-day-inout-surabayawarr/&quot;</span>
+      <span class="p">},</span>
+      <span class="p">{</span>
+        <span class="s2">&quot;id&quot;</span><span class="p">:</span> <span class="mi">5</span><span class="p">,</span>
+        <span class="s2">&quot;title&quot;</span><span class="p">:</span> <span class="s2">&quot;An event that will end in the future&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;description&quot;</span><span class="p">:</span> <span class="s2">&quot;&lt;p&gt;An event that will end in the future&lt;/p&gt;&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;start&quot;</span><span class="p">:</span> <span class="s2">&quot;2020-11-28 02:12:00&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;end&quot;</span><span class="p">:</span> <span class="s2">&quot;2020-12-18 03:30:00&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;banner_link&quot;</span><span class="p">:</span> <span class="s2">&quot;https://cdn.discordapp.com/attachments/475903576707694602/747523206486687794/IN-OUT-WARR.png&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;event_referrer&quot;</span><span class="p">:</span> <span class="s2">&quot;https://forums.vatsim.net/topic/28762-online-day-inout-surabayawarr/&quot;</span>
+      <span class="p">}</span>
+<span class="p">]</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="get-future-events">
+<h3>Get future events<a class="headerlink" href="#get-future-events" title="Permalink to this headline">¶</a></h3>
+<p><code class="docutils literal notranslate"><span class="pre">http://hq.vat-sea.com/api/events/future</span></code></p>
+<p>This endpoint will return all incoming events in HQ.</p>
+<p>Response:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">[</span>
+      <span class="p">{</span>
+        <span class="s2">&quot;id&quot;</span><span class="p">:</span> <span class="mi">5</span><span class="p">,</span>
+        <span class="s2">&quot;title&quot;</span><span class="p">:</span> <span class="s2">&quot;An event that will end in the future&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;description&quot;</span><span class="p">:</span> <span class="s2">&quot;&lt;p&gt;An event that will end in the future&lt;/p&gt;&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;start&quot;</span><span class="p">:</span> <span class="s2">&quot;2020-11-28 02:12:00&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;end&quot;</span><span class="p">:</span> <span class="s2">&quot;2020-12-18 03:30:00&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;banner_link&quot;</span><span class="p">:</span> <span class="s2">&quot;https://cdn.discordapp.com/attachments/475903576707694602/747523206486687794/IN-OUT-WARR.png&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;event_referrer&quot;</span><span class="p">:</span> <span class="s2">&quot;https://forums.vatsim.net/topic/28762-online-day-inout-surabayawarr/&quot;</span>
+      <span class="p">}</span>
+<span class="p">]</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="get-past-events">
+<h3>Get past events<a class="headerlink" href="#get-past-events" title="Permalink to this headline">¶</a></h3>
+<p><code class="docutils literal notranslate"><span class="pre">http://hq.vat-sea.com/api/events/past</span></code></p>
+<p>This endpoint will return all past events in HQ.</p>
+<p>Response:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">[</span>
+      <span class="p">{</span>
+        <span class="s2">&quot;id&quot;</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
+        <span class="s2">&quot;title&quot;</span><span class="p">:</span> <span class="s2">&quot;Amman Thursday Night&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;description&quot;</span><span class="p">:</span> <span class="s2">&quot;Fly into/out of Amman&#39;s Queen Alia Intl. Airport [OJAI] every week on Thursday night with full ATC from 1600z to 1900z!&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;start&quot;</span><span class="p">:</span> <span class="s2">&quot;2020-08-20 16:00:00&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;end&quot;</span><span class="p">:</span> <span class="s2">&quot;2020-08-20 19:00:00&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;banner_link&quot;</span><span class="p">:</span> <span class="s2">&quot;https://i.imgur.com/7cr6kTn.png&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;event_referrer&quot;</span><span class="p">:</span> <span class="s2">&quot;https://forums.vatsim.net/topic/28469-aug-20th-16z-19z-amman-thursday-night/&quot;</span>
+      <span class="p">},</span>
+      <span class="p">{</span>
+        <span class="s2">&quot;id&quot;</span><span class="p">:</span> <span class="mi">2</span><span class="p">,</span>
+        <span class="s2">&quot;title&quot;</span><span class="p">:</span> <span class="s2">&quot;Surabaya In/Out&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;description&quot;</span><span class="p">:</span> <span class="s2">&quot;Surabaya is one of the largest aviation hubs in Indonesia, it is also the second largest city in Indonesia and boast a huge number of international flight due to its popularity as a tourism and business destination.</span><span class="se">\n</span><span class="s2">                                In this event, we will attempt to give you the sensation of flying into one of the busiest airspaces in Indonesia.&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;start&quot;</span><span class="p">:</span> <span class="s2">&quot;2020-08-20 16:00:00&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;end&quot;</span><span class="p">:</span> <span class="s2">&quot;2020-08-20 19:00:00&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;banner_link&quot;</span><span class="p">:</span> <span class="s2">&quot;https://cdn.discordapp.com/attachments/475903576707694602/747523206486687794/IN-OUT-WARR.png&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;event_referrer&quot;</span><span class="p">:</span> <span class="s2">&quot;https://forums.vatsim.net/topic/28762-online-day-inout-surabayawarr/&quot;</span>
+      <span class="p">}</span>
+<span class="p">]</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="get-specific-event">
+<h3>Get specific event<a class="headerlink" href="#get-specific-event" title="Permalink to this headline">¶</a></h3>
+<p><code class="docutils literal notranslate"><span class="pre">http://hq.vat-sea.com/api/event/{id}</span></code></p>
+<p>This endpoint will return an event.</p>
+<p>Example: <code class="docutils literal notranslate"><span class="pre">http://hq.vat-sea.com/api/event/2</span></code></p>
+<p>Response:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
+      <span class="s2">&quot;id&quot;</span><span class="p">:</span> <span class="mi">2</span><span class="p">,</span>
+      <span class="s2">&quot;title&quot;</span><span class="p">:</span> <span class="s2">&quot;Surabaya In/Out&quot;</span><span class="p">,</span>
+      <span class="s2">&quot;description&quot;</span><span class="p">:</span> <span class="s2">&quot;Surabaya is one of the largest aviation hubs in Indonesia, it is also the second largest city in Indonesia and boast a huge number of international flight due to its popularity as a tourism and business destination.</span><span class="se">\n</span><span class="s2">                                In this event, we will attempt to give you the sensation of flying into one of the busiest airspaces in Indonesia.&quot;</span><span class="p">,</span>
+      <span class="s2">&quot;start&quot;</span><span class="p">:</span> <span class="s2">&quot;2020-08-20 16:00:00&quot;</span><span class="p">,</span>
+      <span class="s2">&quot;end&quot;</span><span class="p">:</span> <span class="s2">&quot;2020-08-20 19:00:00&quot;</span><span class="p">,</span>
+      <span class="s2">&quot;banner_link&quot;</span><span class="p">:</span> <span class="s2">&quot;https://cdn.discordapp.com/attachments/475903576707694602/747523206486687794/IN-OUT-WARR.png&quot;</span><span class="p">,</span>
+      <span class="s2">&quot;event_referrer&quot;</span><span class="p">:</span> <span class="s2">&quot;https://forums.vatsim.net/topic/28762-online-day-inout-surabayawarr/&quot;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="get-confirmed-atc-in-an-event">
+<h3>Get confirmed ATC in an event<a class="headerlink" href="#get-confirmed-atc-in-an-event" title="Permalink to this headline">¶</a></h3>
+<p><code class="docutils literal notranslate"><span class="pre">http://hq.vat-sea.com/api/event/{id}/atc</span></code></p>
+<p>This endpoint will return all confirmed ATC for an event.</p>
+<p>Example: <code class="docutils literal notranslate"><span class="pre">http://hq.vat-sea.com/api/event/1/atc</span></code></p>
+<p>Response:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">[</span>
+      <span class="p">{</span>
+        <span class="s2">&quot;position&quot;</span><span class="p">:</span> <span class="s2">&quot;WAAF_CTR&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;controller&quot;</span><span class="p">:</span> <span class="s2">&quot;Web One (1000001)&quot;</span>
+      <span class="p">},</span>
+      <span class="p">{</span>
+        <span class="s2">&quot;position&quot;</span><span class="p">:</span> <span class="s2">&quot;WAMM_TWR&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;controller&quot;</span><span class="p">:</span> <span class="s2">&quot;Web Two (1000002)&quot;</span>
+      <span class="p">},</span>
+      <span class="p">{</span>
+        <span class="s2">&quot;position&quot;</span><span class="p">:</span> <span class="s2">&quot;WAMM_APP&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;controller&quot;</span><span class="p">:</span> <span class="s2">&quot;Web Three (1000003)&quot;</span>
+      <span class="p">}</span>
+<span class="p">]</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="get-event-by-region">
+<h3>Get event by region<a class="headerlink" href="#get-event-by-region" title="Permalink to this headline">¶</a></h3>
+<p><code class="docutils literal notranslate"><span class="pre">http://hq.vat-sea.com/api/events/region/{code}</span></code></p>
+<p>This endpoint will return all ATC in a region.</p>
+<p>Example: <code class="docutils literal notranslate"><span class="pre">http://hq.vat-sea.com/api/event/region/APAC</span></code></p>
+<p>Response:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">[</span>
+      <span class="p">{</span>
+        <span class="s2">&quot;id&quot;</span><span class="p">:</span> <span class="mi">2</span><span class="p">,</span>
+        <span class="s2">&quot;title&quot;</span><span class="p">:</span> <span class="s2">&quot;Surabaya In/Out&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;description&quot;</span><span class="p">:</span> <span class="s2">&quot;Surabaya is one of the largest aviation hubs in Indonesia, it is also the second largest city in Indonesia and boast a huge number of international flight due to its popularity as a tourism and business destination.</span><span class="se">\n</span><span class="s2">                                In this event, we will attempt to give you the sensation of flying into one of the busiest airspaces in Indonesia.&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;start&quot;</span><span class="p">:</span> <span class="s2">&quot;2020-08-20 16:00:00&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;end&quot;</span><span class="p">:</span> <span class="s2">&quot;2020-08-20 19:00:00&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;banner_link&quot;</span><span class="p">:</span> <span class="s2">&quot;https://cdn.discordapp.com/attachments/475903576707694602/747523206486687794/IN-OUT-WARR.png&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;event_referrer&quot;</span><span class="p">:</span> <span class="s2">&quot;https://forums.vatsim.net/topic/28762-online-day-inout-surabayawarr/&quot;</span>
+        <span class="s2">&quot;region&quot;</span><span class="p">:</span> <span class="s2">&quot;APAC&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;division&quot;</span><span class="p">:</span> <span class="s2">&quot;SEA&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;vacc&quot;</span><span class="p">:</span> <span class="s2">&quot;IDN&quot;</span>
+      <span class="p">},</span>
+      <span class="p">{</span>
+        <span class="s2">&quot;id&quot;</span><span class="p">:</span> <span class="mi">5</span><span class="p">,</span>
+        <span class="s2">&quot;title&quot;</span><span class="p">:</span> <span class="s2">&quot;An event that will end in the future&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;description&quot;</span><span class="p">:</span> <span class="s2">&quot;&lt;p&gt;An event that will end in the future&lt;/p&gt;&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;start&quot;</span><span class="p">:</span> <span class="s2">&quot;2020-11-28 02:12:00&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;end&quot;</span><span class="p">:</span> <span class="s2">&quot;2020-12-18 03:30:00&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;banner_link&quot;</span><span class="p">:</span> <span class="s2">&quot;https://cdn.discordapp.com/attachments/475903576707694602/747523206486687794/IN-OUT-WARR.png&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;event_referrer&quot;</span><span class="p">:</span> <span class="s2">&quot;https://forums.vatsim.net/topic/28762-online-day-inout-surabayawarr/&quot;</span>
+        <span class="s2">&quot;region&quot;</span><span class="p">:</span> <span class="s2">&quot;APAC&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;division&quot;</span><span class="p">:</span> <span class="s2">&quot;SEA&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;vacc&quot;</span><span class="p">:</span> <span class="s2">&quot;IDN&quot;</span>
+      <span class="p">}</span>
+<span class="p">]</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="get-event-by-division">
+<h3>Get event by division<a class="headerlink" href="#get-event-by-division" title="Permalink to this headline">¶</a></h3>
+<p><code class="docutils literal notranslate"><span class="pre">http://hq.vat-sea.com/api/events/division/{code}</span></code></p>
+<p>This endpoint will return all ATC in a division.</p>
+<p>Example: <code class="docutils literal notranslate"><span class="pre">http://hq.vat-sea.com/api/event/division/SEA</span></code></p>
+<p>Response:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">[</span>
+      <span class="p">{</span>
+        <span class="s2">&quot;id&quot;</span><span class="p">:</span> <span class="mi">2</span><span class="p">,</span>
+        <span class="s2">&quot;title&quot;</span><span class="p">:</span> <span class="s2">&quot;Surabaya In/Out&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;description&quot;</span><span class="p">:</span> <span class="s2">&quot;Surabaya is one of the largest aviation hubs in Indonesia, it is also the second largest city in Indonesia and boast a huge number of international flight due to its popularity as a tourism and business destination.</span><span class="se">\n</span><span class="s2">                                In this event, we will attempt to give you the sensation of flying into one of the busiest airspaces in Indonesia.&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;start&quot;</span><span class="p">:</span> <span class="s2">&quot;2020-08-20 16:00:00&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;end&quot;</span><span class="p">:</span> <span class="s2">&quot;2020-08-20 19:00:00&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;banner_link&quot;</span><span class="p">:</span> <span class="s2">&quot;https://cdn.discordapp.com/attachments/475903576707694602/747523206486687794/IN-OUT-WARR.png&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;event_referrer&quot;</span><span class="p">:</span> <span class="s2">&quot;https://forums.vatsim.net/topic/28762-online-day-inout-surabayawarr/&quot;</span>
+        <span class="s2">&quot;region&quot;</span><span class="p">:</span> <span class="s2">&quot;APAC&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;division&quot;</span><span class="p">:</span> <span class="s2">&quot;SEA&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;vacc&quot;</span><span class="p">:</span> <span class="s2">&quot;IDN&quot;</span>
+      <span class="p">},</span>
+      <span class="p">{</span>
+        <span class="s2">&quot;id&quot;</span><span class="p">:</span> <span class="mi">5</span><span class="p">,</span>
+        <span class="s2">&quot;title&quot;</span><span class="p">:</span> <span class="s2">&quot;An event that will end in the future&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;description&quot;</span><span class="p">:</span> <span class="s2">&quot;&lt;p&gt;An event that will end in the future&lt;/p&gt;&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;start&quot;</span><span class="p">:</span> <span class="s2">&quot;2020-11-28 02:12:00&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;end&quot;</span><span class="p">:</span> <span class="s2">&quot;2020-12-18 03:30:00&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;banner_link&quot;</span><span class="p">:</span> <span class="s2">&quot;https://cdn.discordapp.com/attachments/475903576707694602/747523206486687794/IN-OUT-WARR.png&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;event_referrer&quot;</span><span class="p">:</span> <span class="s2">&quot;https://forums.vatsim.net/topic/28762-online-day-inout-surabayawarr/&quot;</span>
+        <span class="s2">&quot;region&quot;</span><span class="p">:</span> <span class="s2">&quot;APAC&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;division&quot;</span><span class="p">:</span> <span class="s2">&quot;SEA&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;vacc&quot;</span><span class="p">:</span> <span class="s2">&quot;IDN&quot;</span>
+      <span class="p">}</span>
+<span class="p">]</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="get-event-by-vacc">
+<h3>Get event by vACC<a class="headerlink" href="#get-event-by-vacc" title="Permalink to this headline">¶</a></h3>
+<p><code class="docutils literal notranslate"><span class="pre">http://hq.vat-sea.com/api/events/vacc/{code}</span></code></p>
+<p>This endpoint will return all ATC in a vACC.</p>
+<p>Example: <code class="docutils literal notranslate"><span class="pre">http://hq.vat-sea.com/api/event/vacc/IDN</span></code></p>
+<p>Response:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">[</span>
+      <span class="p">{</span>
+        <span class="s2">&quot;id&quot;</span><span class="p">:</span> <span class="mi">2</span><span class="p">,</span>
+        <span class="s2">&quot;title&quot;</span><span class="p">:</span> <span class="s2">&quot;Surabaya In/Out&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;description&quot;</span><span class="p">:</span> <span class="s2">&quot;Surabaya is one of the largest aviation hubs in Indonesia, it is also the second largest city in Indonesia and boast a huge number of international flight due to its popularity as a tourism and business destination.</span><span class="se">\n</span><span class="s2">                                In this event, we will attempt to give you the sensation of flying into one of the busiest airspaces in Indonesia.&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;start&quot;</span><span class="p">:</span> <span class="s2">&quot;2020-08-20 16:00:00&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;end&quot;</span><span class="p">:</span> <span class="s2">&quot;2020-08-20 19:00:00&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;banner_link&quot;</span><span class="p">:</span> <span class="s2">&quot;https://cdn.discordapp.com/attachments/475903576707694602/747523206486687794/IN-OUT-WARR.png&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;event_referrer&quot;</span><span class="p">:</span> <span class="s2">&quot;https://forums.vatsim.net/topic/28762-online-day-inout-surabayawarr/&quot;</span>
+        <span class="s2">&quot;region&quot;</span><span class="p">:</span> <span class="s2">&quot;APAC&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;division&quot;</span><span class="p">:</span> <span class="s2">&quot;SEA&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;vacc&quot;</span><span class="p">:</span> <span class="s2">&quot;IDN&quot;</span>
+      <span class="p">},</span>
+      <span class="p">{</span>
+        <span class="s2">&quot;id&quot;</span><span class="p">:</span> <span class="mi">5</span><span class="p">,</span>
+        <span class="s2">&quot;title&quot;</span><span class="p">:</span> <span class="s2">&quot;An event that will end in the future&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;description&quot;</span><span class="p">:</span> <span class="s2">&quot;&lt;p&gt;An event that will end in the future&lt;/p&gt;&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;start&quot;</span><span class="p">:</span> <span class="s2">&quot;2020-11-28 02:12:00&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;end&quot;</span><span class="p">:</span> <span class="s2">&quot;2020-12-18 03:30:00&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;banner_link&quot;</span><span class="p">:</span> <span class="s2">&quot;https://cdn.discordapp.com/attachments/475903576707694602/747523206486687794/IN-OUT-WARR.png&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;event_referrer&quot;</span><span class="p">:</span> <span class="s2">&quot;https://forums.vatsim.net/topic/28762-online-day-inout-surabayawarr/&quot;</span>
+        <span class="s2">&quot;region&quot;</span><span class="p">:</span> <span class="s2">&quot;APAC&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;division&quot;</span><span class="p">:</span> <span class="s2">&quot;SEA&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;vacc&quot;</span><span class="p">:</span> <span class="s2">&quot;IDN&quot;</span>
+      <span class="p">}</span>
+<span class="p">]</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="fss">
+<h2>FSS<a class="headerlink" href="#fss" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="get-all-fss">
+<h3>Get all FSS<a class="headerlink" href="#get-all-fss" title="Permalink to this headline">¶</a></h3>
+<p><code class="docutils literal notranslate"><span class="pre">http://hq.vat-sea.com/api/fss/all</span></code></p>
+<p>This endpoint will return all FSS in HQ.</p>
+<p>Example: <code class="docutils literal notranslate"><span class="pre">http://hq.vat-sea.com/api/fss/all</span></code></p>
+<p>Response:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">[</span>
+      <span class="p">{</span>
+        <span class="s2">&quot;controller&quot;</span><span class="p">:</span> <span class="s2">&quot;Web Five (10000005)&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;position&quot;</span><span class="p">:</span> <span class="s2">&quot;ASEA_FSS&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;rating&quot;</span><span class="p">:</span> <span class="s2">&quot;Controller (C1)&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;division&quot;</span><span class="p">:</span> <span class="s2">&quot;SEA&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;region&quot;</span><span class="p">:</span> <span class="s2">&quot;APAC&quot;</span>
+      <span class="p">}</span>
+<span class="p">]</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="get-fss-by-division">
+<h3>Get FSS by division<a class="headerlink" href="#get-fss-by-division" title="Permalink to this headline">¶</a></h3>
+<p><code class="docutils literal notranslate"><span class="pre">http://hq.vat-sea.com/api/fss/division/{code}</span></code></p>
+<p>This endpoint will return all FSS in a division.</p>
+<p>Example: <code class="docutils literal notranslate"><span class="pre">http://hq.vat-sea.com/api/fss/division/SEA</span></code></p>
+<p>Response:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">[</span>
+      <span class="p">{</span>
+        <span class="s2">&quot;controller&quot;</span><span class="p">:</span> <span class="s2">&quot;Web Five (10000005)&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;position&quot;</span><span class="p">:</span> <span class="s2">&quot;ASEA_FSS&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;rating&quot;</span><span class="p">:</span> <span class="s2">&quot;Controller (C1)&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;division&quot;</span><span class="p">:</span> <span class="s2">&quot;SEA&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;region&quot;</span><span class="p">:</span> <span class="s2">&quot;APAC&quot;</span>
+      <span class="p">}</span>
+<span class="p">]</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="general">
+<h2>General<a class="headerlink" href="#general" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="get-member-s-info">
+<h3>Get member’s info<a class="headerlink" href="#get-member-s-info" title="Permalink to this headline">¶</a></h3>
+<p><code class="docutils literal notranslate"><span class="pre">http://hq.vat-sea.com/api/member/{cid}</span></code></p>
+<p>This endpoint will return member data. It will also return staff position if member is a staff and mentor information if member is a mentor.</p>
+<p>Example: <code class="docutils literal notranslate"><span class="pre">http://hq.vat-sea.com/api/member/10000007</span></code></p>
+<p>Response:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
+      <span class="s2">&quot;cid&quot;</span><span class="p">:</span> <span class="mi">10000007</span><span class="p">,</span>
+      <span class="s2">&quot;name&quot;</span><span class="p">:</span> <span class="s2">&quot;Seven Web&quot;</span><span class="p">,</span>
+      <span class="s2">&quot;atc_rating_id&quot;</span><span class="p">:</span> <span class="mi">9</span><span class="p">,</span>
+      <span class="s2">&quot;atc_rating_name&quot;</span><span class="p">:</span> <span class="s2">&quot;Instructor (I1)&quot;</span><span class="p">,</span>
+      <span class="s2">&quot;pilot_rating_id&quot;</span><span class="p">:</span> <span class="mi">15</span><span class="p">,</span>
+      <span class="s2">&quot;pilot_rating_name&quot;</span><span class="p">:</span> <span class="s2">&quot;P1, P2, P3, P4&quot;</span><span class="p">,</span>
+      <span class="s2">&quot;region_code&quot;</span><span class="p">:</span> <span class="s2">&quot;EUR&quot;</span><span class="p">,</span>
+      <span class="s2">&quot;region_name&quot;</span><span class="p">:</span> <span class="s2">&quot;Europe&quot;</span><span class="p">,</span>
+      <span class="s2">&quot;division_code&quot;</span><span class="p">:</span> <span class="s2">&quot;UK&quot;</span><span class="p">,</span>
+      <span class="s2">&quot;division_name&quot;</span><span class="p">:</span> <span class="s2">&quot;UK&quot;</span><span class="p">,</span>
+      <span class="s2">&quot;vacc_code&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+      <span class="s2">&quot;vacc_name&quot;</span><span class="p">:</span> <span class="n">null</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="get-member-s-approval">
+<h3>Get member’s approval<a class="headerlink" href="#get-member-s-approval" title="Permalink to this headline">¶</a></h3>
+<p><code class="docutils literal notranslate"><span class="pre">http://hq.vat-sea.com/api/member/{cid}/approval</span></code></p>
+<p>This endpoint will return member approval for resident, visiting, and FSS.</p>
+<p>Example: <code class="docutils literal notranslate"><span class="pre">http://hq.vat-sea.com/api/member/10000004/approval</span></code></p>
+<p>Response:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">[</span>
+      <span class="p">{</span>
+        <span class="s2">&quot;approved_for&quot;</span><span class="p">:</span> <span class="s2">&quot;DEL,GND,TWR,DEP,APP,CTR&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;vacc&quot;</span><span class="p">:</span> <span class="s2">&quot;IDN&quot;</span>
+      <span class="p">},</span>
+      <span class="p">{</span>
+        <span class="s2">&quot;approved_for&quot;</span><span class="p">:</span> <span class="s2">&quot;ASEA_FSS&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;vacc&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+        <span class="s2">&quot;is_fss&quot;</span><span class="p">:</span> <span class="n">true</span><span class="p">,</span>
+        <span class="s2">&quot;division&quot;</span><span class="p">:</span> <span class="s2">&quot;SEA&quot;</span>
+      <span class="p">}</span>
+<span class="p">]</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="get-member-s-approval-for-fss">
+<h3>Get member’s approval for FSS<a class="headerlink" href="#get-member-s-approval-for-fss" title="Permalink to this headline">¶</a></h3>
+<p><code class="docutils literal notranslate"><span class="pre">http://hq.vat-sea.com/api/member/{cid}/approval/fss</span></code></p>
+<p>This endpoint will return member approval for FSS.</p>
+<p>Example: <code class="docutils literal notranslate"><span class="pre">http://hq.vat-sea.com/api/member/10000004/approval/fss</span></code></p>
+<p>Response:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
+       <span class="s2">&quot;approved_for&quot;</span><span class="p">:</span> <span class="s2">&quot;ASEA_FSS&quot;</span><span class="p">,</span>
+       <span class="s2">&quot;division&quot;</span><span class="p">:</span> <span class="s2">&quot;SEA&quot;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="get-member-s-approval-for-resident-visiting">
+<h3>Get member’s approval for resident/visiting<a class="headerlink" href="#get-member-s-approval-for-resident-visiting" title="Permalink to this headline">¶</a></h3>
+<p><code class="docutils literal notranslate"><span class="pre">http://hq.vat-sea.com/api/member/{cid}/approval/vacc</span></code></p>
+<p>This endpoint will return member approval for resident and visiting.</p>
+<p>Example: <code class="docutils literal notranslate"><span class="pre">http://hq.vat-sea.com/api/member/10000004/approval/vacc</span></code></p>
+<p>Response:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">[</span>
+      <span class="p">{</span>
+        <span class="s2">&quot;approved_for&quot;</span><span class="p">:</span> <span class="s2">&quot;DEL,GND,TWR,DEP,APP,CTR&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;vacc&quot;</span><span class="p">:</span> <span class="s2">&quot;IDN&quot;</span>
+      <span class="p">}</span>
+<span class="p">]</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="news">
+<h2>News<a class="headerlink" href="#news" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="get-a-news">
+<h3>Get a news<a class="headerlink" href="#get-a-news" title="Permalink to this headline">¶</a></h3>
+<p><code class="docutils literal notranslate"><span class="pre">http://hq.vat-sea.com/api/news/{id}</span></code></p>
+<p>This endpoint will return a news.</p>
+<p>Example: <code class="docutils literal notranslate"><span class="pre">http://hq.vat-sea.com/api/news/1</span></code></p>
+<p>Response:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
+      <span class="s2">&quot;subject&quot;</span><span class="p">:</span> <span class="s2">&quot;VATSEA Member Protection Policy&quot;</span><span class="p">,</span>
+      <span class="s2">&quot;content&quot;</span><span class="p">:</span> <span class="s2">&quot;&lt;p&gt;The &lt;strong&gt;VATSEA Member Protection Policy&lt;/strong&gt; will be enforced effective immediately. The Division Policy will be updated shortly to include&amp;nbsp;this newly added regulation.&lt;/p&gt;</span><span class="se">\n\n</span><span class="s2">            &lt;blockquote&gt;</span><span class="se">\n</span><span class="s2">            &lt;p&gt;With immediate effect, ALL VATSIM members and Virtual Area Control Centers (vACC) under the South East Asia Division (VATSEA) are prohibited to post, distribute or demonstrate any forms of political, racial and/or religious material in all official VATSIM channels.&lt;/p&gt;</span><span class="se">\n</span><span class="s2">            </span><span class="se">\n</span><span class="s2">            &lt;p&gt;This includes social media platforms including but not limited to Facebook pages and groups, Discord and WhatsApp.&lt;/p&gt;</span><span class="se">\n</span><span class="s2">            </span><span class="se">\n</span><span class="s2">            &lt;p&gt;Members who fail to comply with this regulation will be subjected to disciplinary action.&lt;/p&gt;</span><span class="se">\n</span><span class="s2">            &lt;/blockquote&gt;</span><span class="se">\n</span><span class="s2">            </span><span class="se">\n</span><span class="s2">            &lt;p&gt;If you have any questions, kindly private message me on discord or drop me an email at &lt;a href=&#39;mailto:isaactan.vatsea@gmail.com&#39;&gt;isaactan.vatsea@gmail.com&lt;/a&gt;&lt;/p&gt;</span><span class="se">\n</span><span class="s2">            </span><span class="se">\n</span><span class="s2">            &lt;p&gt;Thank you for your attention&lt;/p&gt;&quot;</span><span class="p">,</span>
+      <span class="s2">&quot;created_by&quot;</span><span class="p">:</span> <span class="s2">&quot;Web Four (10000004)&quot;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="get-news-by-region">
+<h3>Get news by region<a class="headerlink" href="#get-news-by-region" title="Permalink to this headline">¶</a></h3>
+<p><code class="docutils literal notranslate"><span class="pre">http://hq.vat-sea.com/api/news/region/{code}</span></code></p>
+<p>This endpoint will return news in a region.</p>
+<p>Example: <code class="docutils literal notranslate"><span class="pre">http://hq.vat-sea.com/api/news/region/SEA</span></code></p>
+</div>
+<div class="section" id="get-news-by-division">
+<h3>Get news by division<a class="headerlink" href="#get-news-by-division" title="Permalink to this headline">¶</a></h3>
+<p><code class="docutils literal notranslate"><span class="pre">http://hq.vat-sea.com/api/news/division/{code}</span></code></p>
+<p>This endpoint will return news in a division.</p>
+<p>Example: <code class="docutils literal notranslate"><span class="pre">http://hq.vat-sea.com/api/news/division/SEA</span></code></p>
+<p>Response:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
+      <span class="s2">&quot;subject&quot;</span><span class="p">:</span> <span class="s2">&quot;VATSEA Member Protection Policy&quot;</span><span class="p">,</span>
+      <span class="s2">&quot;content&quot;</span><span class="p">:</span> <span class="s2">&quot;&lt;p&gt;The &lt;strong&gt;VATSEA Member Protection Policy&lt;/strong&gt; will be enforced effective immediately. The Division Policy will be updated shortly to include&amp;nbsp;this newly added regulation.&lt;/p&gt;</span><span class="se">\n\n</span><span class="s2">            &lt;blockquote&gt;</span><span class="se">\n</span><span class="s2">            &lt;p&gt;With immediate effect, ALL VATSIM members and Virtual Area Control Centers (vACC) under the South East Asia Division (VATSEA) are prohibited to post, distribute or demonstrate any forms of political, racial and/or religious material in all official VATSIM channels.&lt;/p&gt;</span><span class="se">\n</span><span class="s2">            </span><span class="se">\n</span><span class="s2">            &lt;p&gt;This includes social media platforms including but not limited to Facebook pages and groups, Discord and WhatsApp.&lt;/p&gt;</span><span class="se">\n</span><span class="s2">            </span><span class="se">\n</span><span class="s2">            &lt;p&gt;Members who fail to comply with this regulation will be subjected to disciplinary action.&lt;/p&gt;</span><span class="se">\n</span><span class="s2">            &lt;/blockquote&gt;</span><span class="se">\n</span><span class="s2">            </span><span class="se">\n</span><span class="s2">            &lt;p&gt;If you have any questions, kindly private message me on discord or drop me an email at &lt;a href=&#39;mailto:isaactan.vatsea@gmail.com&#39;&gt;isaactan.vatsea@gmail.com&lt;/a&gt;&lt;/p&gt;</span><span class="se">\n</span><span class="s2">            </span><span class="se">\n</span><span class="s2">            &lt;p&gt;Thank you for your attention&lt;/p&gt;&quot;</span><span class="p">,</span>
+      <span class="s2">&quot;created_by&quot;</span><span class="p">:</span> <span class="s2">&quot;Web Four (10000004)&quot;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="get-news-by-vacc">
+<h3>Get news by vACC<a class="headerlink" href="#get-news-by-vacc" title="Permalink to this headline">¶</a></h3>
+<p><code class="docutils literal notranslate"><span class="pre">http://hq.vat-sea.com/api/news/vacc/{code}</span></code></p>
+<p>This endpoint will return news in a vACC.</p>
+<p>Example: <code class="docutils literal notranslate"><span class="pre">http://hq.vat-sea.com/api/news/vacc/MYS</span></code></p>
+</div>
+</div>
+<div class="section" id="policy">
+<h2>Policy<a class="headerlink" href="#policy" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="get-a-policy">
+<h3>Get a policy<a class="headerlink" href="#get-a-policy" title="Permalink to this headline">¶</a></h3>
+<p><code class="docutils literal notranslate"><span class="pre">http://hq.vat-sea.com/api/policy/{id}</span></code></p>
+<p>This endpoint will return a policy.</p>
+<p>Example: <code class="docutils literal notranslate"><span class="pre">http://hq.vat-sea.com/api/policy/1</span></code></p>
+</div>
+<div class="section" id="get-policy-by-region">
+<h3>Get policy by region<a class="headerlink" href="#get-policy-by-region" title="Permalink to this headline">¶</a></h3>
+<p><code class="docutils literal notranslate"><span class="pre">http://hq.vat-sea.com/api/policy/region/{code}</span></code></p>
+<p>This endpoint will return policy in a region.</p>
+<p>Example: <code class="docutils literal notranslate"><span class="pre">http://hq.vat-sea.com/api/policy/region/APAC</span></code></p>
+</div>
+<div class="section" id="get-policy-by-division">
+<h3>Get policy by division<a class="headerlink" href="#get-policy-by-division" title="Permalink to this headline">¶</a></h3>
+<p><code class="docutils literal notranslate"><span class="pre">http://hq.vat-sea.com/api/policy/division/{code}</span></code></p>
+<p>This endpoint will return policy in a division.</p>
+<p>Example: <code class="docutils literal notranslate"><span class="pre">http://hq.vat-sea.com/api/policy/division/SEA</span></code></p>
+</div>
+<div class="section" id="get-policy-by-vacc">
+<h3>Get policy by vACC<a class="headerlink" href="#get-policy-by-vacc" title="Permalink to this headline">¶</a></h3>
+<p><code class="docutils literal notranslate"><span class="pre">http://hq.vat-sea.com/api/policy/vacc/{code}</span></code></p>
+<p>This endpoint will return policy in a vACC.</p>
+<p>Example: <code class="docutils literal notranslate"><span class="pre">http://hq.vat-sea.com/api/policy/vacc/MYS</span></code></p>
+</div>
+</div>
+<div class="section" id="region">
+<h2>Region<a class="headerlink" href="#region" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="get-a-region">
+<h3>Get a region<a class="headerlink" href="#get-a-region" title="Permalink to this headline">¶</a></h3>
+<p><code class="docutils literal notranslate"><span class="pre">http://hq.vat-sea.com/api/region/{code}</span></code></p>
+<p>This endpoint will return a region.</p>
+<p>Example: <code class="docutils literal notranslate"><span class="pre">http://hq.vat-sea.com/api/region/APAC</span></code></p>
+</div>
+<div class="section" id="get-divisions-in-region">
+<h3>Get divisions in region<a class="headerlink" href="#get-divisions-in-region" title="Permalink to this headline">¶</a></h3>
+<p><code class="docutils literal notranslate"><span class="pre">http://hq.vat-sea.com/api/region/{code}/division</span></code></p>
+<p>This endpoint will return division in the region.</p>
+<p>Example: <code class="docutils literal notranslate"><span class="pre">http://hq.vat-sea.com/api/region/APAC/division</span></code></p>
+</div>
+<div class="section" id="get-region-staff">
+<h3>Get region staff<a class="headerlink" href="#get-region-staff" title="Permalink to this headline">¶</a></h3>
+<p><code class="docutils literal notranslate"><span class="pre">http://hq.vat-sea.com/api/region/{code}/staff</span></code></p>
+<p>This endpoint will return staff in the region.</p>
+<p>Example: <code class="docutils literal notranslate"><span class="pre">http://hq.vat-sea.com/api/region/APAC/staff</span></code></p>
+</div>
+</div>
+<div class="section" id="division">
+<h2>Division<a class="headerlink" href="#division" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="get-a-division">
+<h3>Get a division<a class="headerlink" href="#get-a-division" title="Permalink to this headline">¶</a></h3>
+<p><code class="docutils literal notranslate"><span class="pre">http://hq.vat-sea.com/api/division/{code}</span></code></p>
+<p>This endpoint will return a division.</p>
+<p>Example: <code class="docutils literal notranslate"><span class="pre">http://hq.vat-sea.com/api/division/SEA</span></code></p>
+</div>
+<div class="section" id="get-vacc-in-division">
+<h3>Get vACC in division<a class="headerlink" href="#get-vacc-in-division" title="Permalink to this headline">¶</a></h3>
+<p><code class="docutils literal notranslate"><span class="pre">http://hq.vat-sea.com/api/division/{code}/vacc</span></code></p>
+<p>This endpoint will return vACC in the division.</p>
+<p>Example: <code class="docutils literal notranslate"><span class="pre">http://hq.vat-sea.com/api/division/SEA/vacc</span></code></p>
+</div>
+<div class="section" id="get-division-staff">
+<h3>Get division staff<a class="headerlink" href="#get-division-staff" title="Permalink to this headline">¶</a></h3>
+<p><code class="docutils literal notranslate"><span class="pre">http://hq.vat-sea.com/api/division/{code}/staff</span></code></p>
+<p>This endpoint will return staff in the division.</p>
+<p>Example: <code class="docutils literal notranslate"><span class="pre">http://hq.vat-sea.com/api/division/SEA/staff</span></code></p>
+</div>
+</div>
+<div class="section" id="vacc">
+<h2>vACC<a class="headerlink" href="#vacc" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="get-a-vacc">
+<h3>Get a vACC<a class="headerlink" href="#get-a-vacc" title="Permalink to this headline">¶</a></h3>
+<p><code class="docutils literal notranslate"><span class="pre">http://hq.vat-sea.com/api/vacc/{code}</span></code></p>
+<p>This endpoint will return a vACC.</p>
+<p>Example: <code class="docutils literal notranslate"><span class="pre">http://hq.vat-sea.com/api/vacc/HK</span></code></p>
+</div>
+<div class="section" id="get-resident-in-vacc">
+<h3>Get resident in vACC<a class="headerlink" href="#get-resident-in-vacc" title="Permalink to this headline">¶</a></h3>
+<p><code class="docutils literal notranslate"><span class="pre">http://hq.vat-sea.com/api/vacc/{code}/resident</span></code></p>
+<p>This endpoint will return residents in the vACC.</p>
+<p>Example: <code class="docutils literal notranslate"><span class="pre">http://hq.vat-sea.com/api/vacc/HK/resident</span></code></p>
+</div>
+<div class="section" id="get-resident-by-rating-in-vacc">
+<h3>Get resident by rating in vACC<a class="headerlink" href="#get-resident-by-rating-in-vacc" title="Permalink to this headline">¶</a></h3>
+<p><code class="docutils literal notranslate"><span class="pre">http://hq.vat-sea.com/api/vacc/{code}/rating/{rating}</span></code></p>
+<p>This endpoint will return residents with the rating in the vACC.</p>
+<p>Example: <code class="docutils literal notranslate"><span class="pre">http://hq.vat-sea.com/api/vacc/HK/rating/3</span></code></p>
+</div>
+<div class="section" id="get-visitor-in-vacc">
+<h3>Get visitor in vACC<a class="headerlink" href="#get-visitor-in-vacc" title="Permalink to this headline">¶</a></h3>
+<p><code class="docutils literal notranslate"><span class="pre">http://hq.vat-sea.com/api/vacc/{code}/visitor</span></code></p>
+<p>This endpoint will return visitors in the vACC.</p>
+<p>Example: <code class="docutils literal notranslate"><span class="pre">http://hq.vat-sea.com/api/vacc/HK/visitor</span></code></p>
+</div>
+<div class="section" id="get-vacc-staff">
+<h3>Get vACC staff<a class="headerlink" href="#get-vacc-staff" title="Permalink to this headline">¶</a></h3>
+<p><code class="docutils literal notranslate"><span class="pre">http://hq.vat-sea.com/api/vacc/{code}/staff</span></code></p>
+<p>This endpoint will return staff of the vACC.</p>
+<p>Example: <code class="docutils literal notranslate"><span class="pre">http://hq.vat-sea.com/api/vacc/HK/staff</span></code></p>
+</div>
+<div class="section" id="get-vacc-mentor">
+<h3>Get vACC mentor<a class="headerlink" href="#get-vacc-mentor" title="Permalink to this headline">¶</a></h3>
+<p><code class="docutils literal notranslate"><span class="pre">http://hq.vat-sea.com/api/vacc/{code}/mentor</span></code></p>
+<p>This endpoint will return staff of the vACC.</p>
+<p>Example: <code class="docutils literal notranslate"><span class="pre">http://hq.vat-sea.com/api/vacc/HK/mentor</span></code></p>
+</div>
+</div>
+<div class="section" id="solo">
+<h2>Solo<a class="headerlink" href="#solo" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="get-solo-by-region">
+<h3>Get solo by region<a class="headerlink" href="#get-solo-by-region" title="Permalink to this headline">¶</a></h3>
+<p><code class="docutils literal notranslate"><span class="pre">http://hq.vat-sea.com/api/solo/region/{code}</span></code></p>
+<p>This endpoint will return solo in a region.</p>
+<p>Example: <code class="docutils literal notranslate"><span class="pre">http://hq.vat-sea.com/api/solo/region/APAC</span></code></p>
+</div>
+<div class="section" id="get-solo-by-division">
+<h3>Get solo by division<a class="headerlink" href="#get-solo-by-division" title="Permalink to this headline">¶</a></h3>
+<p><code class="docutils literal notranslate"><span class="pre">http://hq.vat-sea.com/api/solo/division/{code}</span></code></p>
+<p>This endpoint will return solo in a division.</p>
+<p>Example: <code class="docutils literal notranslate"><span class="pre">http://hq.vat-sea.com/api/solo/division/SEA</span></code></p>
+</div>
+<div class="section" id="get-solo-by-vacc">
+<h3>Get solo by vACC<a class="headerlink" href="#get-solo-by-vacc" title="Permalink to this headline">¶</a></h3>
+<p><code class="docutils literal notranslate"><span class="pre">http://hq.vat-sea.com/api/solo/vacc/{code}</span></code></p>
+<p>This endpoint will return solo in a vACC.</p>
+<p>Example: <code class="docutils literal notranslate"><span class="pre">http://hq.vat-sea.com/api/solo/vacc/MYS</span></code></p>
+</div>
+</div>
+<div class="section" id="charscector">
+<h2>CharSceCtor<a class="headerlink" href="#charscector" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="get-charscector-in-vacc-by-type">
+<h3>Get CharSceCtor in vACC by type<a class="headerlink" href="#get-charscector-in-vacc-by-type" title="Permalink to this headline">¶</a></h3>
+<p><code class="docutils literal notranslate"><span class="pre">http://hq.vat-sea.com/api/charscector/{code}/{type}</span></code></p>
+<p>This endpoint will return CharSceCtor in a vACC with mentioned type.</p>
+<p>Available type: chart, misc, scenery, sop (all with lowercase, otherwise won’t work)</p>
+<p>Example: <code class="docutils literal notranslate"><span class="pre">http://hq.vat-sea.com/api/charscector/VCL/chart</span></code></p>
+</div>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="hq-member-code.html" class="btn btn-neutral float-right" title="HQ Member Code" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="index.html" class="btn btn-neutral float-left" title="Welcome to SEAWA HQ’s documentation!" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        
+        &copy; Copyright 2020, Wildan Gunawan &amp; Frederick Arisandi
+
+    </p>
+  </div>
+    
+    
+    
+    Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>
