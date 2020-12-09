@@ -1,7 +1,7 @@
 API Reference
 *************
 
-SEAWA HQ is a HQ built for VATSEA and VATWA. Since both division has decided to have their own HQ while still use the same system, we decided to use both domain in our example.
+VATSEA and VATWA HQ will share the same coding for both systems. Therefore, this documentation will use both domain to be shown as the example.
 
 Change the example domain to **hq.vatwa.net/api/** for VATWA HQ or **hq.vat-sea.com/api/** for VATSEA HQ. Please note that there is a maximum limit 30 requests/hour/IP address for all routes.
 
@@ -11,7 +11,7 @@ Region, division, and subdivision code used below can be found at :doc:`here <hq
 Event
 =====
 
-Get all events
+Retrieve all events
 """"""""""""""
 
 ``http://hq.vat-sea.com/api/events/all``
@@ -50,7 +50,7 @@ Response::
 	  }
     ]
 
-Get future events
+Retrieve future events
 """""""""""""""""
 
 ``http://hq.vat-sea.com/api/events/future``
@@ -71,7 +71,7 @@ Response::
 	  }
     ]
 
-Get past events
+Retrieve past events
 """""""""""""""
 
 ``http://hq.vat-sea.com/api/events/past``
@@ -101,7 +101,7 @@ Response::
 	  }
     ]
 
-Get specific event
+Retrieve specific event
 """"""""""""""""""
 
 ``http://hq.vat-sea.com/api/event/{id}``
@@ -122,7 +122,7 @@ Response::
 	  "event_referrer": "https://forums.vatsim.net/topic/28762-online-day-inout-surabayawarr/"
     }
 
-Get confirmed ATC in an event
+Retrieve confirmed ATC in an event
 """""""""""""""""""""""""""""
 
 ``http://hq.vat-sea.com/api/event/{id}/atc``
@@ -148,7 +148,7 @@ Response::
 	  }
     ]
 
-Get event by region
+Retrieve event by region
 """""""""""""""""""
 
 ``http://hq.vat-sea.com/api/events/region/{code}``
@@ -186,7 +186,7 @@ Response::
 	  }
     ]
 
-Get event by division
+Retrieve event by division
 """""""""""""""""""""
 
 ``http://hq.vat-sea.com/api/events/division/{code}``
@@ -224,7 +224,7 @@ Response::
 	  }
     ]
 
-Get event by vACC
+Retrieve event by vACC
 """""""""""""""""
 
 ``http://hq.vat-sea.com/api/events/vacc/{code}``
@@ -266,7 +266,7 @@ Response::
 FSS
 ===
 
-Get all FSS
+Retrieve all FSS
 """""""""""
 
 ``http://hq.vat-sea.com/api/fss/all``
@@ -287,7 +287,7 @@ Response::
 	  }
     ]
 
-Get FSS by division
+Retrieve FSS by division
 """""""""""""""""""
 
 ``http://hq.vat-sea.com/api/fss/division/{code}``
@@ -312,7 +312,7 @@ Response::
 General
 =======
 
-Get member's info
+Retrieve member's info
 """""""""""""""""
 
 ``http://hq.vat-sea.com/api/member/{cid}``
@@ -338,7 +338,7 @@ Response::
 	  "vacc_name": null
     }
 
-Get member's approval
+Retrieve member's approval
 """""""""""""""""""""
 
 ``http://hq.vat-sea.com/api/member/{cid}/approval``
@@ -362,7 +362,7 @@ Response::
 	  }
     ]
 
-Get member's approval for FSS
+Retrieve member's approval for FSS
 """""""""""""""""""""""""""""
 
 ``http://hq.vat-sea.com/api/member/{cid}/approval/fss``
@@ -378,7 +378,7 @@ Response::
 	   "division": "SEA"
     }
 
-Get member's approval for resident/visiting
+Retrieve member's approval for resident/visiting
 """""""""""""""""""""""""""""""""""""""""""
 
 ``http://hq.vat-sea.com/api/member/{cid}/approval/vacc``
@@ -400,7 +400,7 @@ Response::
 News
 ====
 
-Get a news
+Retrieve a news
 """"""""""
 
 ``http://hq.vat-sea.com/api/news/{id}``
@@ -417,7 +417,7 @@ Response::
 	  "created_by": "Web Four (10000004)"
     }
 
-Get news by region
+Retrieve news by region
 """"""""""""""""""
 
 ``http://hq.vat-sea.com/api/news/region/{code}``
@@ -426,7 +426,7 @@ This endpoint will return news in a region.
 
 Example: ``http://hq.vat-sea.com/api/news/region/SEA``
 
-Get news by division
+Retrieve news by division
 """"""""""""""""""""
 
 ``http://hq.vat-sea.com/api/news/division/{code}``
@@ -443,7 +443,7 @@ Response::
 	  "created_by": "Web Four (10000004)"
     }
 
-Get news by vACC
+Retrieve news by vACC
 """"""""""""""""
 
 ``http://hq.vat-sea.com/api/news/vacc/{code}``
@@ -456,7 +456,7 @@ Example: ``http://hq.vat-sea.com/api/news/vacc/MYS``
 Policy
 ======
 
-Get a policy
+Retrieve a policy
 """"""""""""
 
 ``http://hq.vat-sea.com/api/policy/{id}``
@@ -465,7 +465,7 @@ This endpoint will return a policy.
 
 Example: ``http://hq.vat-sea.com/api/policy/1``
 
-Get policy by region
+Retrieve policy by region
 """"""""""""""""""""
 
 ``http://hq.vat-sea.com/api/policy/region/{code}``
@@ -474,7 +474,7 @@ This endpoint will return policy in a region.
 
 Example: ``http://hq.vat-sea.com/api/policy/region/APAC``
 
-Get policy by division
+Retrieve policy by division
 """"""""""""""""""""""
 
 ``http://hq.vat-sea.com/api/policy/division/{code}``
@@ -483,7 +483,7 @@ This endpoint will return policy in a division.
 
 Example: ``http://hq.vat-sea.com/api/policy/division/SEA``
 
-Get policy by vACC
+Retrieve policy by vACC
 """"""""""""""""""
 
 ``http://hq.vat-sea.com/api/policy/vacc/{code}``
@@ -496,7 +496,7 @@ Example: ``http://hq.vat-sea.com/api/policy/vacc/MYS``
 Region
 ======
 
-Get a region
+Retrieve a region
 """"""""""""
 
 ``http://hq.vat-sea.com/api/region/{code}``
@@ -505,7 +505,7 @@ This endpoint will return a region.
 
 Example: ``http://hq.vat-sea.com/api/region/APAC``
 
-Get divisions in region
+Retrieve divisions in region
 """""""""""""""""""""""
 
 ``http://hq.vat-sea.com/api/region/{code}/division``
@@ -514,7 +514,7 @@ This endpoint will return division in the region.
 
 Example: ``http://hq.vat-sea.com/api/region/APAC/division``
 
-Get region staff
+Retrieve region staff
 """"""""""""""""
 
 ``http://hq.vat-sea.com/api/region/{code}/staff``
@@ -527,7 +527,7 @@ Example: ``http://hq.vat-sea.com/api/region/APAC/staff``
 Division
 ========
 
-Get a division
+Retrieve a division
 """"""""""""""
 
 ``http://hq.vat-sea.com/api/division/{code}``
@@ -536,7 +536,7 @@ This endpoint will return a division.
 
 Example: ``http://hq.vat-sea.com/api/division/SEA``
 
-Get vACC in division
+Retrieve vACC in division
 """"""""""""""""""""
 
 ``http://hq.vat-sea.com/api/division/{code}/vacc``
@@ -545,7 +545,7 @@ This endpoint will return vACC in the division.
 
 Example: ``http://hq.vat-sea.com/api/division/SEA/vacc``
 
-Get division staff
+Retrieve division staff
 """"""""""""""""""
 
 ``http://hq.vat-sea.com/api/division/{code}/staff``
@@ -558,7 +558,7 @@ Example: ``http://hq.vat-sea.com/api/division/SEA/staff``
 vACC
 ====
 
-Get a vACC
+Retrieve a vACC
 """"""""""
 
 ``http://hq.vat-sea.com/api/vacc/{code}``
@@ -567,7 +567,7 @@ This endpoint will return a vACC.
 
 Example: ``http://hq.vat-sea.com/api/vacc/HK``
 
-Get resident in vACC
+Retrieve resident in vACC
 """"""""""""""""""""
 
 ``http://hq.vat-sea.com/api/vacc/{code}/resident``
@@ -576,7 +576,7 @@ This endpoint will return residents in the vACC.
 
 Example: ``http://hq.vat-sea.com/api/vacc/HK/resident``
 
-Get resident by rating in vACC
+Retrieve resident by rating in vACC
 """"""""""""""""""""""""""""""
 
 ``http://hq.vat-sea.com/api/vacc/{code}/rating/{rating}``
@@ -585,7 +585,7 @@ This endpoint will return residents with the rating in the vACC.
 
 Example: ``http://hq.vat-sea.com/api/vacc/HK/rating/3``
 
-Get visitor in vACC
+Retrieve visitor in vACC
 """""""""""""""""""
 
 ``http://hq.vat-sea.com/api/vacc/{code}/visitor``
@@ -594,7 +594,7 @@ This endpoint will return visitors in the vACC.
 
 Example: ``http://hq.vat-sea.com/api/vacc/HK/visitor``
 
-Get vACC staff
+Retrieve vACC staff
 """"""""""""""
 
 ``http://hq.vat-sea.com/api/vacc/{code}/staff``
@@ -603,7 +603,7 @@ This endpoint will return staff of the vACC.
 
 Example: ``http://hq.vat-sea.com/api/vacc/HK/staff``
 
-Get vACC mentor
+Retrieve vACC mentor
 """""""""""""""
 
 ``http://hq.vat-sea.com/api/vacc/{code}/mentor``
@@ -617,7 +617,7 @@ Example: ``http://hq.vat-sea.com/api/vacc/HK/mentor``
 Solo
 ====
 
-Get solo by region
+Retrieve solo by region
 """"""""""""""""""""
 
 ``http://hq.vat-sea.com/api/solo/region/{code}``
@@ -626,7 +626,7 @@ This endpoint will return solo in a region.
 
 Example: ``http://hq.vat-sea.com/api/solo/region/APAC``
 
-Get solo by division
+Retrieve solo by division
 """"""""""""""""""""""
 
 ``http://hq.vat-sea.com/api/solo/division/{code}``
@@ -635,7 +635,7 @@ This endpoint will return solo in a division.
 
 Example: ``http://hq.vat-sea.com/api/solo/division/SEA``
 
-Get solo by vACC
+Retrieve solo by vACC
 """"""""""""""""""
 
 ``http://hq.vat-sea.com/api/solo/vacc/{code}``
@@ -648,7 +648,7 @@ Example: ``http://hq.vat-sea.com/api/solo/vacc/MYS``
 CharSceCtor
 ===========
 
-Get CharSceCtor in vACC by type
+Retrieve CharSceCtor in vACC by type
 """""""""""""""""""""""""""""""
 
 ``http://hq.vat-sea.com/api/charscector/{code}/{type}``
