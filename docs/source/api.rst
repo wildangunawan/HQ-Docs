@@ -553,6 +553,15 @@ Retrieve division staff
 This endpoint will return staff in the division.
 
 Example: ``http://hq.vat-sea.com/api/division/SEA/staff``
+
+Retrieve division mentor
+"""""""""""""""""""
+
+``http://hq.vatwa.net/api/division/{code}/mentor``
+
+This endpoint will return mentor of the division.
+
+Example: ``http://hq.vatwa.net/api/division/WA/mentor``
    
 ====
 vACC
@@ -608,7 +617,7 @@ Retrieve vACC mentor
 
 ``http://hq.vat-sea.com/api/vacc/{code}/mentor``
 
-This endpoint will return staff of the vACC.
+This endpoint will return mentor of the vACC.
 
 Example: ``http://hq.vat-sea.com/api/vacc/HK/mentor``
 
